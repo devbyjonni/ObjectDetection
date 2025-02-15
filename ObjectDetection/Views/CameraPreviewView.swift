@@ -8,7 +8,6 @@
 import SwiftUI
 import AVFoundation
 
-// MARK: - Camera Preview
 struct CameraPreviewView: UIViewRepresentable {
     let previewLayer: AVCaptureVideoPreviewLayer?
     

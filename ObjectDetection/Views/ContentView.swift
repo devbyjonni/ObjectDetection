@@ -8,26 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var cameraManager = CameraManager()
-    @State private var detectedObjects: [Observation] = []
-    
+    @State private var viewModel = ContentViewModel()
+
     var body: some View {
         ZStack {
-            CameraPreviewView(previewLayer: cameraManager.previewLayer)
+            CameraPreviewView(previewLayer: viewModel.previewLayer)
                 .edgesIgnoringSafeArea(.all)
             
-            ForEach(detectedObjects) { object in
+            ForEach(viewModel.detectedObjects) { object in
                 BoundingBoxView(object: object)
             }
         }
         .onAppear {
-            cameraManager.setupCamera()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .detectedObjectsUpdated)) { notification in
-            if let detected = notification.object as? [Observation] {
-                detectedObjects = detected
-            }
+            viewModel.startDetection()
         }
     }
 }
-

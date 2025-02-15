@@ -8,10 +8,8 @@
 
 import SwiftUI
 
-
-// MARK: - Bounding Box View
 struct BoundingBoxView: View {
-    let object: Observation
+    let object: ObservationModel
     
     var body: some View {
         GeometryReader { geometry in
